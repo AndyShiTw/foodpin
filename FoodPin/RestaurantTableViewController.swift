@@ -18,6 +18,7 @@ class RestaurantTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.cellLayoutMarginsFollowReadableWidth = true;
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -44,6 +45,14 @@ class RestaurantTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let optionMenu = UIAlertController(title:nil,message:"what do you want?",preferredStyle:.actionSheet)
         
+        // iPad不使用actionSheet，使用popoverCotnroller處理
+        if let popoverController = optionMenu.popoverPresentationController{
+            if let cell = tableView.cellForRow(at: indexPath){
+                popoverController.sourceView = cell;
+                popoverController.sourceRect = cell.bounds;
+            }
+        }
+        
         let cancelAction = UIAlertAction(title:"Cancel",style:.cancel,handler:nil)
         
         optionMenu.addAction(cancelAction)
@@ -54,35 +63,39 @@ class RestaurantTableViewController: UITableViewController {
             self.present(alertMessage,animated: true,completion: nil);
         }
         let callAction = UIAlertAction(title:"Call 123-000-\(indexPath.row)" , style:.default,handler:callActionHandler )
-        
         optionMenu.addAction(callAction)
-        /*
-        let checkInAction = UIAlertAction(title:"Check in", style:.default,handler:{
-            (action:UIAlertAction!) -> Void in
-            let cell = tableView.cellForRow(at:indexPath)
-            self.restaurantIsVisited[indexPath.row] = true
-            cell?.accessoryType = .checkmark
-            
-            
-            if self.restaurantIsVisited[indexPath.row] {
-                cell?.accessoryType = .checkmark
-            } else {
-                cell?.accessoryType = .none
-            }
- 
-        })
- */
+        
         let checkInAction = UIAlertAction(title: "Check in", style: .default, handler: {
             (action:UIAlertAction!) -> Void in
             
+            let hearttick = UIImage(named:"heart-tick");
+            let imageView = UIImageView(image:hearttick);
             // 這裡的cell是在點選時，就加上打勾標記
             let cell = tableView.cellForRow(at: indexPath)
-            cell?.accessoryType = .checkmark
+            //cell?.accessoryType = .checkmark
+            cell?.accessoryView = imageView;
             // 這個陣列是為了讓view 也就是cellForRowAt去判斷，這個cell需不需要打勾
             self.restaurantIsVisited[indexPath.row] = true
         })
-        optionMenu.addAction(checkInAction)
         
+        //取消勾選功能
+        let undoCheckInAction = UIAlertAction(title: "Undo Check in", style: .default, handler: {
+            (action:UIAlertAction!) -> Void in
+            
+            // 這裡的cell是在點選時，就取消打勾標記
+            let cell = tableView.cellForRow(at: indexPath)
+            cell?.accessoryType = .none
+            // 這個陣列是為了讓view 也就是cellForRowAt去判斷，這個cell需不需要打勾
+            self.restaurantIsVisited[indexPath.row] = false
+        })
+
+        // 若已勾選的選項，顯示取消勾選功能
+        if(restaurantIsVisited[indexPath.row]){
+            optionMenu.addAction(undoCheckInAction)
+        } else {
+            optionMenu.addAction(checkInAction)
+        }
+
         present(optionMenu,animated:true,completion:nil)
         
         // 取消選取行數灰底
@@ -93,12 +106,17 @@ class RestaurantTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "Cell";
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! RestaurantTableViewCell
+        let hearttick = UIImage(named:"heart-tick");
+        let imageView = UIImageView(image:hearttick);
+        
+        
         cell.nameLabel?.text = restaurantNames[indexPath.row];
         cell.thumbnailImageView?.image = restaurantImage[indexPath.row];
         cell.locationLabel?.text = restaurantLocation[indexPath.row];
         cell.typeLabel?.text = restaurantType[indexPath.row];
         if(restaurantIsVisited[indexPath.row]){
-            cell.accessoryType = .checkmark
+            //cell.accessoryType = .checkmark
+            cell.accessoryView = imageView;
         } else {
             cell.accessoryType = .none
         }

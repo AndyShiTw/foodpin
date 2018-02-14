@@ -68,6 +68,9 @@
                                         <constraint firstItem="jOl-0d-vkz" firstAttribute="leading" secondItem="dqI-M5-8za" secondAttribute="leading" constant="6" id="v9u-V5-MSm"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="keyPath" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="locationLabel" destination="6Yr-dO-VdV" id="0At-NB-CBi"/>
                                     <outlet property="nameLabel" destination="xrA-DU-igh" id="wu0-pu-cCf"/>
