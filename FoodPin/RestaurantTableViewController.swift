@@ -129,24 +129,73 @@ class RestaurantTableViewController: UITableViewController {
         return cell
     }
     
+    // Override to support editing the table view.
+    // 用來新增或刪除tableview
+    /*
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            
+            restaurantNames.remove(at: indexPath.row)
+            restaurantLocation.remove(at: indexPath.row)
+            restaurantType.remove(at: indexPath.row)
+            restaurantIsVisited.remove(at: indexPath.row)
+            restaurantImage.remove(at: indexPath.row)
+            
+            // 直接從畫面上刪除，並使用動畫功能
+            tableView.deleteRows(at: [indexPath], with: .left)
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+        
+        // 畫面重新讀取資料
+//        tableView.reloadData()
+        
+        //debug方法
+        print("total item \(restaurantNames.count)")
+        for name in restaurantNames{
+            print(name)
+        }
+    }
+    */
+    
+    override func tableView(_ tableView:UITableView,trailingSwipeActionsConfigurationForRowAt indexPath:IndexPath) -> UISwipeActionsConfiguration? {
+        let  deleteAction = UIContextualAction(style:.destructive,title:"Delete"){ (action,sourceView,completionHandler) in
+            // 找到資料來源並刪除
+            self.restaurantNames.remove(at: indexPath.row)
+            self.restaurantLocation.remove(at: indexPath.row)
+            self.restaurantType.remove(at: indexPath.row)
+            self.restaurantIsVisited.remove(at: indexPath.row)
+            self.restaurantImage.remove(at: indexPath.row)
+            
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            // 呼叫完成處理器取消動作按鈕
+            completionHandler(true);
+        }
+        
+        let  shareAction = UIContextualAction(style:.normal,title:"Share"){ (action,sourceView,completionHandler) in
+            let defaultText = " Just checking in at  " + self.restaurantNames[indexPath.row];
+            let activityController = UIActivityViewController(activityItems:[defaultText],applicationActivities:nil)
+            self.present(activityController,animated:true,completion:nil )
+
+            
+            // 呼叫完成處理器取消動作按鈕
+            completionHandler(true);
+        }
+        
+        let swipeConfiguration = UISwipeActionsConfiguration(actions:[deleteAction,shareAction])
+        
+        return swipeConfiguration
+    }
+    
+    
 
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
     }
     */
 
