@@ -16,9 +16,33 @@ class RestaurantTableViewController: UITableViewController {
     var restaurantType = ["Coffee & Tea Shop","Cafe","Tea House","Austrain / Causual Drink","French","Bakery","Bakery","Chocolate","Cafe","American / Seafood","American","American","Breakfast & Brunch","Coffee & Tea","Latin American","Spanish","Spanish","Spanish","Spanish","British","Thai"];
     var restaurantIsVisited = Array(repeating: false, count: 21)
     
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        
+        // 搜尋segue的ID，並將資料傳遞過去
+        if segue.identifier == "showRestaurantDetail"{
+            if let indexPath = tableView.indexPathForSelectedRow{
+                let destinationController = segue.destination as! RestaurantDetailViewController
+                destinationController.restaurantImage = restaurantImage[indexPath.row];
+                destinationController.restaurantName = restaurantNames[indexPath.row];
+                destinationController.restaurantType = restaurantType[indexPath.row];
+                destinationController.restaurantLocation = restaurantLocation[indexPath.row];
+            }
+        }
+        
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.cellLayoutMarginsFollowReadableWidth = true;
+        
+        // 開啟大標題
+        navigationController?.navigationBar.prefersLargeTitles = true;
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -42,6 +66,8 @@ class RestaurantTableViewController: UITableViewController {
         return restaurantNames.count;
     }
     
+    // 點選cell彈出下方選單
+    /*
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let optionMenu = UIAlertController(title:nil,message:"what do you want?",preferredStyle:.actionSheet)
         
@@ -59,7 +85,7 @@ class RestaurantTableViewController: UITableViewController {
         
         let callActionHandler = { (action:UIAlertAction!) -> Void in
             let alertMessage = UIAlertController(title:"Service Unavailable" , message:"Sorry",preferredStyle:.alert);
-        alertMessage.addAction(UIAlertAction(title:"OK",style:.default,handler:nil))
+            alertMessage.addAction(UIAlertAction(title:"OK",style:.default,handler:nil))
             self.present(alertMessage,animated: true,completion: nil);
         }
         let callAction = UIAlertAction(title:"Call 123-000-\(indexPath.row)" , style:.default,handler:callActionHandler )
@@ -85,6 +111,7 @@ class RestaurantTableViewController: UITableViewController {
             // 這裡的cell是在點選時，就取消打勾標記
             let cell = tableView.cellForRow(at: indexPath)
             cell?.accessoryType = .none
+            cell?.accessoryView = .none
             // 這個陣列是為了讓view 也就是cellForRowAt去判斷，這個cell需不需要打勾
             self.restaurantIsVisited[indexPath.row] = false
         })
@@ -101,6 +128,7 @@ class RestaurantTableViewController: UITableViewController {
         // 取消選取行數灰底
         tableView.deselectRow(at: indexPath, animated: false)
     }
+    */
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -115,10 +143,11 @@ class RestaurantTableViewController: UITableViewController {
         cell.locationLabel?.text = restaurantLocation[indexPath.row];
         cell.typeLabel?.text = restaurantType[indexPath.row];
         if(restaurantIsVisited[indexPath.row]){
-            //cell.accessoryType = .checkmark
+            cell.accessoryType = .checkmark
             cell.accessoryView = imageView;
         } else {
             cell.accessoryType = .none
+            cell.accessoryView = .none;
         }
         
         // 我故意將restaurantImage2陣列只有一個值
@@ -160,7 +189,7 @@ class RestaurantTableViewController: UITableViewController {
     */
     
     override func tableView(_ tableView:UITableView,trailingSwipeActionsConfigurationForRowAt indexPath:IndexPath) -> UISwipeActionsConfiguration? {
-        let  deleteAction = UIContextualAction(style:.destructive,title:"Delete"){ (action,sourceView,completionHandler) in
+        let deleteAction = UIContextualAction(style:.destructive,title:"Delete"){ (action,sourceView,completionHandler) in
             // 找到資料來源並刪除
             self.restaurantNames.remove(at: indexPath.row)
             self.restaurantLocation.remove(at: indexPath.row)
@@ -174,17 +203,82 @@ class RestaurantTableViewController: UITableViewController {
             completionHandler(true);
         }
         
-        let  shareAction = UIContextualAction(style:.normal,title:"Share"){ (action,sourceView,completionHandler) in
+        let shareAction = UIContextualAction(style:.normal,title:"Share"){ (action,sourceView,completionHandler) in
             let defaultText = " Just checking in at  " + self.restaurantNames[indexPath.row];
-            let activityController = UIActivityViewController(activityItems:[defaultText],applicationActivities:nil)
+            let activityController : UIActivityViewController
+            
+            if let imageToShare : UIImage = self.restaurantImage[indexPath.row]{
+                activityController = UIActivityViewController(activityItems:[defaultText,imageToShare],applicationActivities:nil)
+            } else {
+                activityController = UIActivityViewController(activityItems:[defaultText],applicationActivities:nil)
+            }
+            
+            if let popoverController = activityController.popoverPresentationController{
+                if let cell = tableView.cellForRow(at: indexPath){
+                    popoverController.sourceView = cell;
+                    popoverController.sourceRect = cell.bounds;
+                }
+            }
+            
             self.present(activityController,animated:true,completion:nil )
-
             
             // 呼叫完成處理器取消動作按鈕
             completionHandler(true);
         }
         
+        deleteAction.image = UIImage(named:"delete");
+        deleteAction.backgroundColor = UIColor(red:231.0/255.0,green:76.0/255.0,blue:38.0/255.0,alpha:1.0)
+        
+        shareAction.image = UIImage(named:"share");
+        shareAction.backgroundColor = UIColor(red:254.0/255.0,green:149.0/255.0,blue:18.0/255.0,alpha:1.0)
+        
         let swipeConfiguration = UISwipeActionsConfiguration(actions:[deleteAction,shareAction])
+        
+        return swipeConfiguration
+    }
+    
+    override func tableView(_ tableView:UITableView,leadingSwipeActionsConfigurationForRowAt indexPath:IndexPath) -> UISwipeActionsConfiguration? {
+        let checkinAction = UIContextualAction(style:.normal,title:"Share"){ (action,sourceView,completionHandler) in
+            let hearttick = UIImage(named:"heart-tick");
+            let imageView = UIImageView(image:hearttick);
+            
+            // 這裡的cell是在點選時，就加上打勾標記
+            let cell = tableView.cellForRow(at: indexPath)
+            //cell?.accessoryType = .checkmark
+            cell?.accessoryView = imageView;
+            // 這個陣列是為了讓view 也就是cellForRowAt去判斷，這個cell需不需要打勾
+            self.restaurantIsVisited[indexPath.row] = true
+            
+            // 呼叫完成處理器取消動作按鈕
+            completionHandler(true);
+        }
+        
+        let undoAction = UIContextualAction(style:.normal,title:"Share"){ (action,sourceView,completionHandler) in
+            // 這裡的cell是在點選時，就取消打勾標記
+            let cell = tableView.cellForRow(at: indexPath)
+            cell?.accessoryType = .none
+            cell?.accessoryView = .none
+            // 這個陣列是為了讓view 也就是cellForRowAt去判斷，這個cell需不需要打勾
+            self.restaurantIsVisited[indexPath.row] = false
+            
+            // 呼叫完成處理器取消動作按鈕
+            completionHandler(true);
+        }
+        
+        //checkinAction = UIColor(red:231.0/255.0,green:76.0/255.0,blue:38.0/255.0,alpha:1.0)
+        //undoAction = UIColor(red:254.0/255.0,green:149.0/255.0,blue:18.0/255.0,alpha:1.0)
+        checkinAction.image = UIImage(named:"tick");
+        undoAction.image = UIImage(named:"undo");
+        checkinAction.backgroundColor = UIColor(red:124/255,green:252/255,blue:0/255,alpha:1);
+        undoAction.backgroundColor = UIColor(red:34/255,green:128/255,blue:34/255,alpha:1);
+        
+        let swipeConfiguration:UISwipeActionsConfiguration;
+        
+        if(restaurantIsVisited[indexPath.row]){
+            swipeConfiguration = UISwipeActionsConfiguration(actions:[undoAction])
+        } else {
+            swipeConfiguration = UISwipeActionsConfiguration(actions:[checkinAction])
+        }
         
         return swipeConfiguration
     }
@@ -214,14 +308,7 @@ class RestaurantTableViewController: UITableViewController {
     }
     */
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
+    
 
 }
