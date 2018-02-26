@@ -13,19 +13,19 @@ class RestaurantDetailViewController: UIViewController {
     @IBOutlet var restaurantNameLabel : UILabel!
     @IBOutlet var restaurantTypeLabel : UILabel!
     @IBOutlet var restaurantLoactionLabel : UILabel!
-    var restaurantName = ""
-    var restaurantType = ""
-    var restaurantLocation = ""
-    var restaurantImage = #imageLiteral(resourceName: "cafelore");
+    // UIImage就是圖片檔案類型的資料型態
+    // var restaurantImage : UIImage?
+    
+    var restaurant : Restaurant = Restaurant()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        restaurantImageView.image = restaurantImage;
-        restaurantNameLabel.text = restaurantName;
-        restaurantTypeLabel.text = restaurantType;
-        restaurantLoactionLabel.text = restaurantLocation;
+        restaurantImageView.image = UIImage(named:restaurant.image);
+        restaurantNameLabel.text = restaurant.name;
+        restaurantTypeLabel.text = restaurant.type;
+        restaurantLoactionLabel.text = restaurant.location;
         
         // 停止大標題顯示
         // .always是一直使用
