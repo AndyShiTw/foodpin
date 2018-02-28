@@ -18,7 +18,7 @@ class Restaurant {
     var phone : String;
     var description : String;
     
-    init(name:String,type:String,location:String,image:String,isVisited:Bool,phone:String,description:String){
+    init(name:String,type:String,location:String,phone:String,description:String,image:String,isVisited:Bool){
         self.name = name
         self.type = type
         self.location = location
@@ -29,7 +29,7 @@ class Restaurant {
     }
     
     convenience init() {
-        self.init(name:"",type:"",location:"",image:"",isVisited:false,phone:"",description:"")
+        self.init(name:"",type:"",location:"",phone:"",description:"",image:"",isVisited:false)
     }
     
     
