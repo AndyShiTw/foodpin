@@ -20,12 +20,37 @@ class RestaurantDetailViewController: UIViewController , UITableViewDataSource ,
     
     var restaurant : Restaurant = Restaurant()
     
+//    由於viewDidLoad只會讀取一次，故使用viewWillAppear，每次呈現畫面前，去調整導覽列顯示問題
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.hidesBarsOnSwipe = false
+        navigationController?.setNavigationBarHidden(false, animated:true)
+    }
+    
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //連結DataSource Delegate
         tableView.delegate = self
         tableView.dataSource = self
+        // 控制是否位移，這個案例中，為了將整個table往上移，故選never
+        // automatic 和scrollableAxes一样,scrollView会自动计算和适应顶部和底部的内边距并且在scrollView 不可滚动时,也会设置内边距.
+//        scrollableAxes 自动计算内边距.
+//        never不计算内边距
+//        always 根据safeAreaInsets 计算内边距
+//
+//        作者：codeCoder
+//        链接：https://www.jianshu.com/p/1601bd885f83
+//        來源：简书
+//        著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+        tableView.contentInsetAdjustmentBehavior = .never
+        // 移除cell的格線
+        tableView.separatorStyle = .none
 
         // Do any additional setup after loading the view.
         // 舊的細節畫面
@@ -45,8 +70,11 @@ class RestaurantDetailViewController: UIViewController , UITableViewDataSource ,
         // .automatic是繼承上一個頁面的大標題
         navigationItem.largeTitleDisplayMode = .never
         
-        // 移除cell的格線
-        tableView.separatorStyle = .none
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        // 導覽列的顏色
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.hidesBarsOnSwipe = false
     }
 
     override func didReceiveMemoryWarning() {

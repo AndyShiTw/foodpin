@@ -61,6 +61,12 @@ class RestaurantTableViewController: UITableViewController {
         }
         
     }
+    //    由於viewDidLoad只會讀取一次，故使用viewWillAppear，每次呈現畫面前，去調整導覽列顯示問題
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.hidesBarsOnSwipe = true
+    }
     
     
     override func viewDidLoad() {
@@ -75,6 +81,18 @@ class RestaurantTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+//        取消導覽列標題
+        navigationController?.hidesBarsOnSwipe = true
+        
+       
+        // 將導覽列插入一個空白圖片，以表現透明
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        // 改變標題顏色
+        if let customFonr = UIFont(name:"Rubik-Medium",size:40.0){
+            navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor(red:231.0/255.0,green:76.0/255.0,blue:60.0/255.0,alpha:1.0),NSAttributedStringKey.font:customFonr]
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {

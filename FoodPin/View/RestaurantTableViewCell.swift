@@ -11,7 +11,12 @@ import UIKit
 class RestaurantTableViewCell: UITableViewCell {
     
     @IBOutlet var nameLabel : UILabel!
-    @IBOutlet var locationLabel : UILabel!
+    @IBOutlet var locationLabel : UILabel! {
+        didSet {
+//            numberOfLines可以顯示多行文字
+            locationLabel.numberOfLines = 0
+        }
+    }
     @IBOutlet var typeLabel : UILabel!
     @IBOutlet var thumbnailImageView : UIImageView! {
         didSet {
