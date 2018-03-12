@@ -15,8 +15,8 @@ class RestaurantTableViewCell: UITableViewCell {
     @IBOutlet var typeLabel : UILabel!
     @IBOutlet var thumbnailImageView : UIImageView! {
         didSet {
-            thumbnailImageView.layer.cornerRadius = thumbnailImageView.bounds.width / 3
-            thumbnailImageView.clipsToBounds = true
+            //thumbnailImageView.layer.cornerRadius = thumbnailImageView.bounds.width / 3
+            //thumbnailImageView.clipsToBounds = true
         }
     }
     override func awakeFromNib() {

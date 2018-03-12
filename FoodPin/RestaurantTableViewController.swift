@@ -14,7 +14,13 @@ class RestaurantTableViewController: UITableViewController {
     var restaurantImage2 = ["cafedeadend","homei"];
     var restaurantLocation = ["Hong Konk","Hong Konk","Hong Konk","Hong Konk","Hong Konk","Hong Konk","Hong Konk","Sydney","Sydney","Sydney","New York","New York","New York","New York","New York","New York","New York","London","London","London","London"];
     var restaurantType = ["Coffee & Tea Shop","Cafe","Tea House","Austrain / Causual Drink","French","Bakery","Bakery","Chocolate","Cafe","American / Seafood","American","American","Breakfast & Brunch","Coffee & Tea","Latin American","Spanish","Spanish","Spanish","Spanish","British","Thai"];
+<<<<<<< HEAD
     var restaurantIsVisited = Array(repeating: false, count: 21)
+=======
+    override var prefersStatusBarHidden:Bool{
+        return true;
+    }
+>>>>>>> refs/remotes/origin/master
     
     override func viewDidLoad() {
         super.viewDidLoad()
