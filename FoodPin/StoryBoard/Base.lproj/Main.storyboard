@@ -125,6 +125,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="350"/>
                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CZX-55-Km0">
+                                            <rect key="frame" x="260" y="286" width="50" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="CuT-gt-mtE"/>
+                                                <constraint firstAttribute="width" constant="50" id="zHy-Lp-l9H"/>
+                                            </constraints>
+                                        </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IMw-nO-XnA" userLabel="Name Label">
                                             <rect key="frame" x="14" y="272" width="91.5" height="41"/>
                                             <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="35"/>
@@ -156,9 +163,11 @@
                                         <constraint firstItem="zrL-rr-W9O" firstAttribute="leading" secondItem="yEm-gs-bil" secondAttribute="leading" constant="14" id="1cl-Nk-ouk"/>
                                         <constraint firstItem="Icg-Pj-pHB" firstAttribute="leading" secondItem="yEm-gs-bil" secondAttribute="leading" id="1jl-DN-bTw"/>
                                         <constraint firstItem="IMw-nO-XnA" firstAttribute="leading" secondItem="zrL-rr-W9O" secondAttribute="leading" id="81B-al-Fnc"/>
+                                        <constraint firstAttribute="trailing" secondItem="CZX-55-Km0" secondAttribute="trailing" constant="10" id="IMC-bI-tJu"/>
                                         <constraint firstAttribute="trailing" secondItem="Icg-Pj-pHB" secondAttribute="trailing" id="OMH-wr-iTs"/>
                                         <constraint firstAttribute="bottom" secondItem="zrL-rr-W9O" secondAttribute="bottom" constant="14" id="OVG-Gk-ewd"/>
                                         <constraint firstItem="A2n-g1-vQY" firstAttribute="top" secondItem="yEm-gs-bil" secondAttribute="top" id="XGc-DC-iuy"/>
+                                        <constraint firstItem="zrL-rr-W9O" firstAttribute="bottom" secondItem="CZX-55-Km0" secondAttribute="bottom" id="Xrr-8v-JPB"/>
                                         <constraint firstAttribute="trailing" secondItem="A2n-g1-vQY" secondAttribute="trailing" id="Zq0-zy-Eck"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="IMw-nO-XnA" secondAttribute="trailing" constant="50" id="chR-4R-3RU"/>
                                         <constraint firstItem="PHI-Kf-3Td" firstAttribute="centerY" secondItem="zrL-rr-W9O" secondAttribute="centerY" id="dW5-9W-G4O"/>
@@ -172,8 +181,40 @@
                                         <outlet property="headerImageView" destination="Icg-Pj-pHB" id="rFJ-Mp-xGZ"/>
                                         <outlet property="heartImageView" destination="PHI-Kf-3Td" id="lUe-P2-Uct"/>
                                         <outlet property="nameLabel" destination="IMw-nO-XnA" id="egf-SH-rcn"/>
+                                        <outlet property="ratingImageView" destination="CZX-55-Km0" id="FNe-32-URb"/>
                                         <outlet property="typeLabel" destination="zrL-rr-W9O" id="x14-Z3-4Sm"/>
                                     </connections>
+                                </view>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="P4U-zA-Adx">
+                                    <rect key="frame" x="0.0" y="750" width="320" height="90"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gh9-Rf-egD">
+                                            <rect key="frame" x="15" y="29" width="290" height="47"/>
+                                            <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="47" id="E68-ca-ItR"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                            <state key="normal" title="Rate">
+                                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="25"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <segue destination="nCx-iB-mDU" kind="presentation" identifier="showReview" modalTransitionStyle="crossDissolve" id="6W6-PN-IrL"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="gh9-Rf-egD" secondAttribute="bottom" constant="14" id="RCB-3U-Q8z"/>
+                                        <constraint firstAttribute="trailing" secondItem="gh9-Rf-egD" secondAttribute="trailing" constant="15" id="UKl-Ro-Xcb"/>
+                                        <constraint firstItem="gh9-Rf-egD" firstAttribute="leading" secondItem="P4U-zA-Adx" secondAttribute="leading" constant="15" id="c9o-lB-dke"/>
+                                    </constraints>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantDetailIconTextCell" id="tWw-vL-Qfe" customClass="RestaurantDetailIconTextCell" customModule="FoodPin" customModuleProvider="target">
@@ -353,6 +394,98 @@
             </objects>
             <point key="canvasLocation" x="2244" y="109"/>
         </scene>
+        <!--Review View Controller-->
+        <scene sceneID="94r-U0-adg">
+            <objects>
+                <viewController id="nCx-iB-mDU" customClass="ReviewViewController" customModule="FoodPin" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="q72-93-Fp7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wkr-yU-g5Z">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VE4-FL-H1V" userLabel="Cross">
+                                <rect key="frame" x="264" y="48" width="33" height="32"/>
+                                <state key="normal" image="cross"/>
+                                <connections>
+                                    <segue destination="guZ-xM-1WW" kind="unwind" unwindAction="closeWithSegue:" id="GwZ-Lu-1Er"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="CpV-C1-DEA">
+                                <rect key="frame" x="46.5" y="43.5" width="227" height="481"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zFe-Jd-MYX">
+                                        <rect key="frame" x="0.0" y="0.0" width="188" height="82"/>
+                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
+                                        <state key="normal" title="Love" image="love"/>
+                                        <connections>
+                                            <segue destination="guZ-xM-1WW" kind="unwind" identifier="love" unwindAction="rateResaurantWithSegue:" id="PtE-Py-AoT"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zoq-fv-aIx">
+                                        <rect key="frame" x="0.0" y="92" width="181" height="83"/>
+                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
+                                        <state key="normal" title="Cool" image="cool"/>
+                                        <connections>
+                                            <segue destination="guZ-xM-1WW" kind="unwind" identifier="cool" unwindAction="rateResaurantWithSegue:" id="lu0-vK-5dC"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oco-fF-2TT">
+                                        <rect key="frame" x="0.0" y="185" width="227" height="86"/>
+                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
+                                        <state key="normal" title="Happy" image="happy"/>
+                                        <connections>
+                                            <segue destination="guZ-xM-1WW" kind="unwind" identifier="happy" unwindAction="rateResaurantWithSegue:" id="Zue-tE-9WQ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aok-4b-pc5">
+                                        <rect key="frame" x="0.0" y="281" width="167" height="87"/>
+                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
+                                        <state key="normal" title="Sad" image="sad"/>
+                                        <connections>
+                                            <segue destination="guZ-xM-1WW" kind="unwind" identifier="sad" unwindAction="rateResaurantWithSegue:" id="HqO-JC-cym"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Ni-hv-Xbf">
+                                        <rect key="frame" x="0.0" y="378" width="218" height="103"/>
+                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="50"/>
+                                        <state key="normal" title="Angry" image="angry"/>
+                                        <connections>
+                                            <segue destination="guZ-xM-1WW" kind="unwind" identifier="angry" unwindAction="rateResaurantWithSegue:" id="fhU-x1-sAY"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="eCq-Bb-9o4" firstAttribute="trailing" secondItem="VE4-FL-H1V" secondAttribute="trailing" constant="23" id="AJi-si-KJg"/>
+                            <constraint firstItem="CpV-C1-DEA" firstAttribute="centerY" secondItem="q72-93-Fp7" secondAttribute="centerY" id="CKY-oi-l8K"/>
+                            <constraint firstItem="wkr-yU-g5Z" firstAttribute="top" secondItem="q72-93-Fp7" secondAttribute="top" id="Cgu-d3-MRg"/>
+                            <constraint firstItem="eCq-Bb-9o4" firstAttribute="trailing" secondItem="wkr-yU-g5Z" secondAttribute="trailing" id="Jg6-Nh-HAX"/>
+                            <constraint firstItem="wkr-yU-g5Z" firstAttribute="leading" secondItem="eCq-Bb-9o4" secondAttribute="leading" id="OQ9-Sy-LIL"/>
+                            <constraint firstItem="eCq-Bb-9o4" firstAttribute="bottom" secondItem="wkr-yU-g5Z" secondAttribute="bottom" id="SMd-7H-OCY"/>
+                            <constraint firstItem="VE4-FL-H1V" firstAttribute="top" secondItem="eCq-Bb-9o4" secondAttribute="top" constant="28" id="ZeC-ge-udO"/>
+                            <constraint firstItem="CpV-C1-DEA" firstAttribute="centerX" secondItem="q72-93-Fp7" secondAttribute="centerX" id="cGK-NT-iCf"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="eCq-Bb-9o4"/>
+                    </view>
+                    <connections>
+                        <outlet property="backgroundImageView" destination="wkr-yU-g5Z" id="XHJ-SC-oX2"/>
+                        <outlet property="crossButton" destination="VE4-FL-H1V" id="Rhj-Gd-R1B"/>
+                        <outletCollection property="ratingButtons" destination="zFe-Jd-MYX" collectionClass="NSMutableArray" id="DvC-ay-zdU"/>
+                        <outletCollection property="ratingButtons" destination="zoq-fv-aIx" collectionClass="NSMutableArray" id="gvC-fJ-Ia8"/>
+                        <outletCollection property="ratingButtons" destination="oco-fF-2TT" collectionClass="NSMutableArray" id="Nkd-ZB-OZ0"/>
+                        <outletCollection property="ratingButtons" destination="aok-4b-pc5" collectionClass="NSMutableArray" id="vEW-aF-BoB"/>
+                        <outletCollection property="ratingButtons" destination="2Ni-hv-Xbf" collectionClass="NSMutableArray" id="jaJ-Op-bLL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OU6-As-f6p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="guZ-xM-1WW" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2243" y="782"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="TZU-qj-OIm">
             <objects>
@@ -373,6 +506,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="angry" width="78" height="103"/>
+        <image name="cool" width="78" height="83"/>
+        <image name="cross" width="33" height="32"/>
+        <image name="happy" width="78" height="86"/>
         <image name="heart-tick" width="22" height="21"/>
+        <image name="love" width="78" height="82"/>
+        <image name="sad" width="78" height="87"/>
     </resources>
 </document>

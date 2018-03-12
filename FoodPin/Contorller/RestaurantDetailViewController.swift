@@ -26,7 +26,37 @@ class RestaurantDetailViewController: UIViewController , UITableViewDataSource ,
             let destinationController = segue.destination as! MapViewController
             destinationController.restaurant = restaurant
         }
+        
+        if segue.identifier == "showReview"{
+            let destinationController = segue.destination as! ReviewViewController
+            destinationController.restaurant = restaurant
+        }
     }
+    
+    // XX的退出功能
+    @IBAction func close(segue:UIStoryboardSegue){
+        dismiss(animated: true, completion: nil)
+    }
+    
+    // 評價表情地退出功能
+    @IBAction func rateResaurant(segue:UIStoryboardSegue){
+        if let rating = segue.identifier{
+            self.restaurant.rating = rating
+            self.headerView.ratingImageView.image = UIImage(named:rating)
+            
+            let scaleTransform = CGAffineTransform.init(scaleX:0.1,y:0.1)
+            self.headerView.ratingImageView.transform = scaleTransform
+            self.headerView.ratingImageView.alpha = 0
+            
+            UIView.animate(withDuration: 0.4,delay:0.4,usingSpringWithDamping:0.2,initialSpringVelocity:0.7,options:[], animations: {
+                self.headerView.ratingImageView.transform = .identity
+                self.headerView.ratingImageView.alpha = 1
+            })
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
     
 //    由於viewDidLoad只會讀取一次，故使用viewWillAppear，每次呈現畫面前，去調整導覽列顯示問題
     override func viewWillAppear(_ animated: Bool) {
