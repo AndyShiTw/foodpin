@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import CoreData
 
 // UIImagePickerControllerDelegate,UINavigationControllerDelegate 是用來取得照片的
 
 class NewRestaurantController: UITableViewController,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+    
+    var restaurant: RestaurantMO!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +65,26 @@ class NewRestaurantController: UITableViewController,UITextFieldDelegate,UIImage
             vaildAlertController.addAction(cancelAction);
             present(vaildAlertController,animated: true,completion: nil)
         } else {
+            // 儲存資料
+            if let appDelegate = (UIApplication.shared.delegate as? AppDelegate){
+                restaurant = RestaurantMO(context : appDelegate.persistentContainer.viewContext)
+                restaurant.name = nameTextField.text
+                restaurant.phone = phoneTextField.text
+                restaurant.type = typeTextField.text
+                restaurant.location = addressTextField.text
+                restaurant.summary = descriptionTextView.text
+                restaurant.isVisited = false
+                
+                if let restaurantImage = photoImageView.image  {
+                    // 使用UIImagePNGRepresentation會導致照片轉90度，使用JPEG就不會有這個問題
+                    restaurant.image = UIImageJPEGRepresentation(restaurantImage,1.0)
+                }
+                
+                appDelegate.saveContext()
+            }
+            
+            
+            
             performSegue(withIdentifier: "unwinToHome", sender: self)
         }
     }

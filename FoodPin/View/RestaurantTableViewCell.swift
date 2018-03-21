@@ -20,6 +20,7 @@ class RestaurantTableViewCell: UITableViewCell {
     @IBOutlet var typeLabel : UILabel!
     @IBOutlet var thumbnailImageView : UIImageView! {
         didSet {
+//            thumbnailImageView.transform = CGAffineTransform(scaleX: -1, y: 1)
             //thumbnailImageView.layer.cornerRadius = thumbnailImageView.bounds.width / 3
             //thumbnailImageView.clipsToBounds = true
         }

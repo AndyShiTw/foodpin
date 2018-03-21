@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -78,9 +79,6 @@
                                         <constraint firstItem="jOl-0d-vkz" firstAttribute="leading" secondItem="dqI-M5-8za" secondAttribute="leading" constant="6" id="v9u-V5-MSm"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="keyPath" value="YES"/>
-                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="locationLabel" destination="6Yr-dO-VdV" id="0At-NB-CBi"/>
                                     <outlet property="nameLabel" destination="xrA-DU-igh" id="wu0-pu-cCf"/>
@@ -104,8 +102,30 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="emptyRestaurantView" destination="BJe-ZW-tbg" id="bME-yB-AvS"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VSR-ti-7Vz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="BJe-ZW-tbg">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty" translatesAutoresizingMaskIntoConstraints="NO" id="OAd-hm-fjE">
+                            <rect key="frame" x="28" y="120" width="319" height="355"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="OAd-hm-fjE" secondAttribute="height" multiplier="80:89" id="cvc-yg-DyZ"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="OAd-hm-fjE" firstAttribute="leading" secondItem="O3j-hK-Yk3" secondAttribute="leading" constant="28" id="gCn-gi-zxS"/>
+                        <constraint firstItem="OAd-hm-fjE" firstAttribute="top" secondItem="O3j-hK-Yk3" secondAttribute="top" constant="100" id="hAq-uj-ezU"/>
+                        <constraint firstAttribute="trailing" secondItem="OAd-hm-fjE" secondAttribute="trailing" constant="28" id="iYL-LF-HIy"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="O3j-hK-Yk3"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="536.25" y="109.85915492957747"/>
         </scene>
@@ -769,6 +789,7 @@
         <image name="close" width="16" height="16"/>
         <image name="cool" width="78" height="83"/>
         <image name="cross" width="33" height="32"/>
+        <image name="empty" width="310" height="372"/>
         <image name="happy" width="78" height="86"/>
         <image name="heart-tick" width="22" height="21"/>
         <image name="love" width="78" height="82"/>

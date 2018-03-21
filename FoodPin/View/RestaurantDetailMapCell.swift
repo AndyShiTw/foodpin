@@ -36,7 +36,6 @@ class RestaurantDetailMapCell: UITableViewCell {
                 return
             }
             if let placemarks = placemarks {
-                print("123456");
                 // 取得第一個地點標記
                 let placemark = placemarks[0]
                 

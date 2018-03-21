@@ -14,13 +14,15 @@ class ReviewViewController: UIViewController {
     @IBOutlet var ratingButtons : [UIButton]!
     @IBOutlet var crossButton : UIButton!
     
-    var restaurant = Restaurant()
+    var restaurant : RestaurantMO!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        backgroundImageView.image = UIImage(named:restaurant.image)
+        if let restaurantImage = restaurant.image{
+            backgroundImageView.image = UIImage(data: restaurantImage as Data)
+        }
         
         // 使用模糊效果
         let blurEffect = UIBlurEffect(style:.dark)
