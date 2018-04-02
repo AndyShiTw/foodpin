@@ -46,15 +46,31 @@ class RestaurantTableViewController: UITableViewController,NSFetchedResultsContr
             if let indexPath = tableView.indexPathForSelectedRow{
                 let destinationController = segue.destination as! RestaurantDetailViewController
                 destinationController.restaurant = (searchController.isActive) ? searchResults[indexPath.row] : restaurants[indexPath.row]
+                // 隱藏標籤列
+                destinationController.hidesBottomBarWhenPushed = true
             }
         }
         
+        
+        
     }
-    //    由於viewDidLoad只會讀取一次，故使用viewWillAppear，每次呈現畫面前，去調整導覽列顯示問題
+    //  由於viewDidLoad只會讀取一次，故使用viewWillAppear，每次呈現畫面前，去調整導覽列顯示問題
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         navigationController?.hidesBarsOnSwipe = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if UserDefaults.standard.bool(forKey: "hasViewedWalkthrough"){
+            return
+        }
+        
+        let storyBoard = UIStoryboard(name:"OnBoarding",bundle:nil)
+        if let walkthroughViewController = storyBoard.instantiateViewController(withIdentifier: "WalkthroughViewController") as? WalkthroughViewController {
+            present(walkthroughViewController,animated: false,completion: nil)
+        }
+        
     }
     
     // 過濾搜尋結果
