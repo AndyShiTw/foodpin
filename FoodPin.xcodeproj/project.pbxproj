@@ -34,6 +34,8 @@
 		3B600BF42057ABFF00A1ED02 /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B600BF32057ABFF00A1ED02 /* RoundedTextField.swift */; };
 		3B8814D320720FA8002D3493 /* Discover.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B8814D220720FA8002D3493 /* Discover.storyboard */; };
 		3B8814D520720FC6002D3493 /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B8814D420720FC6002D3493 /* About.storyboard */; };
+		3B8814D72072164F002D3493 /* AboutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8814D62072164F002D3493 /* AboutTableViewController.swift */; };
+		3B8814D920721CAD002D3493 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8814D820721CAD002D3493 /* WebViewViewController.swift */; };
 		3BB644B0202ADDE200661DEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB644AF202ADDE200661DEC /* AppDelegate.swift */; };
 		3BB644B5202ADDE200661DEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BB644B3202ADDE200661DEC /* Main.storyboard */; };
 		3BB644B7202ADDE200661DEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BB644B6202ADDE200661DEC /* Assets.xcassets */; };
@@ -74,6 +76,8 @@
 		3B600BF32057ABFF00A1ED02 /* RoundedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
 		3B8814D220720FA8002D3493 /* Discover.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Discover.storyboard; sourceTree = "<group>"; };
 		3B8814D420720FC6002D3493 /* About.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = About.storyboard; sourceTree = "<group>"; };
+		3B8814D62072164F002D3493 /* AboutTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTableViewController.swift; sourceTree = "<group>"; };
+		3B8814D820721CAD002D3493 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		3BB644AC202ADDE200661DEC /* FoodPin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodPin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BB644AF202ADDE200661DEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BB644B4202ADDE200661DEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -163,6 +167,8 @@
 				3B338C1F206E25ED00466130 /* WalkthroughContentViewController.swift */,
 				3B338C21206F713800466130 /* WallthroughPageViewController.swift */,
 				3B338C23206F777D00466130 /* WalkthroughViewController.swift */,
+				3B8814D62072164F002D3493 /* AboutTableViewController.swift */,
+				3B8814D820721CAD002D3493 /* WebViewViewController.swift */,
 			);
 			path = Contorller;
 			sourceTree = "<group>";
@@ -319,6 +325,7 @@
 				3BC077542043EDB500A3C1E7 /* Restaurant.swift in Sources */,
 				3B600BEE20567DDE00A1ED02 /* ReviewViewController.swift in Sources */,
 				3B415CF92047CEF600C06A92 /* RestaurantDetailMapCell.swift in Sources */,
+				3B8814D920721CAD002D3493 /* WebViewViewController.swift in Sources */,
 				3B415CED2046747900C06A92 /* RestaurantDetailTextCell.swift in Sources */,
 				3BB644C2202ADF0500661DEC /* RestaurantTableViewController.swift in Sources */,
 				3BB644C4202C2D9B00661DEC /* RestaurantTableViewCell.swift in Sources */,
@@ -326,6 +333,7 @@
 				3B338C24206F777D00466130 /* WalkthroughViewController.swift in Sources */,
 				3B415CFB2047E43E00C06A92 /* MapViewController.swift in Sources */,
 				3B415CEB2046737100C06A92 /* RestaurantDetailIconTextCell.swift in Sources */,
+				3B8814D72072164F002D3493 /* AboutTableViewController.swift in Sources */,
 				3B415CF220468CBC00C06A92 /* UINavigationController+Ext.swift in Sources */,
 				3B338C22206F713800466130 /* WallthroughPageViewController.swift in Sources */,
 				3B600BF22057A81900A1ED02 /* NewRestaurantController.swift in Sources */,
